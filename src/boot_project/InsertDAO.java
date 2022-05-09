@@ -20,7 +20,7 @@ public class InsertDAO {
 		try {
 			con = jdbcTemplate.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sv.getName());
+			pstmt.setString(1, sv.getName()); 
 			pstmt.setObject(2, sv.getBirth());
 			pstmt.setLong(3, sv.getDivision_Code());
 			pstmt.setLong(4, sv.getPosition_Code());
