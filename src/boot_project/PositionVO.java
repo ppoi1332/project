@@ -28,4 +28,11 @@ public class PositionVO {
 		this.position = position;
 	}
 
+	@Override
+	public String toString() {
+		return  number + "." + position;
+	}
+
+	
+	
 }

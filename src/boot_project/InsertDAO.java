@@ -54,7 +54,7 @@ public class InsertDAO {
 		boolean ret = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into \"DIVISION\" values  (\"SEQ_SOLDIER\".nextval,?)";	
+		String sql = "insert into \"DIVISION\" values  (\"SEQ_DIVISION\".nextval,?)";	
 		try {
 			con = jdbcTemplate.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -86,7 +86,7 @@ public class InsertDAO {
 		boolean ret = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into \"POSITION\" values  (\"SEQ_SOLDIER\".nextval,?)";	
+		String sql = "insert into \"POSITION\" values  (\"SEQ_POSITION\".nextval,?)";	
 		try {
 			con = jdbcTemplate.getConnection();
 			pstmt = con.prepareStatement(sql);

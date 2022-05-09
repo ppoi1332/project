@@ -27,5 +27,10 @@ public class DivisionVO {
 	public void setDivision(String division) {
 		this.division = division;
 	}
-	
+
+	@Override
+	public String toString() {
+		return number + "." + division;
+	}
+
 }

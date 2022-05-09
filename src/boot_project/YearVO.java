@@ -27,5 +27,11 @@ public class YearVO {
 	public void setYear(String year) {
 		this.year = year;
 	}
+
+	@Override
+	public String toString() {
+		return number + "." + year;
+	}
+	
 	
 }
