@@ -108,6 +108,52 @@ public class SelectDAO {
 		return (ls.size() == 0) ? null : ls;
 	}
 	
+	public List<YearVO> selectYear(){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
+		List<YearVO> ls = new ArrayList<>();	
+		String sql = "select * from \"YEAR\" order by \"NUMBER\" asc";
+		try {
+			conn = jdbcTemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				YearVO tmp = new YearVO(
+						rs.getLong(1),
+						rs.getString("YEAR")
+						);
+				ls.add(tmp);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return (ls.size() == 0) ? null : ls;
+	}
+	
 	public List<SoldierVO> selectDivisionAll(long number) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -116,6 +162,113 @@ public class SelectDAO {
 		String sql = "select \"SD\".\"NAME\", \"SD\".\"BIRTH\",\"DS\".\"DIVISION_NAME\", \"PS\".\"POSITION_NAME\", \"SD\".\"INDAY\", \"SD\".\"OUTDAY\", \"YR\".\"YEAR\" "
 				+ "from \"SOLDIER\" \"SD\", \"DIVISION\" \"DS\", \"POSITION\" \"PS\", \"YEAR\" \"YR\""
 				+ " where \"SD\".\"DIVISION_CODE\" = \"DS\".\"NUMBER\" and \"SD\".\"POSITION_CODE\" = \"PS\".\"NUMBER\" and \"SD\".\"YEAR\" = \"YR\".\"NUMBER\" and \"SD\".\"DIVISION_CODE\" = '"+number+"'";	
+		try {
+			conn = jdbcTemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				SoldierVO tmp = new SoldierVO(
+						rs.getString("NAME"),
+						LocalDate.parse(rs.getDate("BIRTH").toString()),
+						rs.getString("DIVISION_NAME"),
+						rs.getString("POSITION_NAME"),
+						LocalDate.parse(rs.getDate("INDAY").toString()),
+						LocalDate.parse(rs.getDate("OUTDAY").toString()),
+						rs.getString("YEAR")
+						);
+				ls.add(tmp);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return (ls.size() == 0) ? null : ls;
+	}
+	
+	public List<SoldierVO> selectPositionAll(long number) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
+		List<SoldierVO> ls = new ArrayList<>();	
+		String sql = "select \"SD\".\"NAME\", \"SD\".\"BIRTH\",\"DS\".\"DIVISION_NAME\", \"PS\".\"POSITION_NAME\", \"SD\".\"INDAY\", \"SD\".\"OUTDAY\", \"YR\".\"YEAR\" "
+				+ "from \"SOLDIER\" \"SD\", \"DIVISION\" \"DS\", \"POSITION\" \"PS\", \"YEAR\" \"YR\""
+				+ " where \"SD\".\"DIVISION_CODE\" = \"DS\".\"NUMBER\" and \"SD\".\"POSITION_CODE\" = \"PS\".\"NUMBER\" and \"SD\".\"YEAR\" = \"YR\".\"NUMBER\" and \"SD\".\"POSITION_CODE\" = '"+number+"'";	
+		try {
+			conn = jdbcTemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				SoldierVO tmp = new SoldierVO(
+						rs.getString("NAME"),
+						LocalDate.parse(rs.getDate("BIRTH").toString()),
+						rs.getString("DIVISION_NAME"),
+						rs.getString("POSITION_NAME"),
+						LocalDate.parse(rs.getDate("INDAY").toString()),
+						LocalDate.parse(rs.getDate("OUTDAY").toString()),
+						rs.getString("YEAR")
+						);
+				ls.add(tmp);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return (ls.size() == 0) ? null : ls;
+	}
+	
+	public List<SoldierVO> selectYearAll(long number) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
+		List<SoldierVO> ls = new ArrayList<>();	
+		String sql = "select \"SD\".\"NAME\", \"SD\".\"BIRTH\",\"DS\".\"DIVISION_NAME\", \"PS\".\"POSITION_NAME\", \"SD\".\"INDAY\", \"SD\".\"OUTDAY\", \"YR\".\"YEAR\" "
+				+ "from \"SOLDIER\" \"SD\", \"DIVISION\" \"DS\", \"POSITION\" \"PS\", \"YEAR\" \"YR\""
+				+ " where \"SD\".\"DIVISION_CODE\" = \"DS\".\"NUMBER\" and \"SD\".\"POSITION_CODE\" = \"PS\".\"NUMBER\" and \"SD\".\"YEAR\" = \"YR\".\"NUMBER\" and \"SD\".\"YEAR\" = '"+number+"'";	
 		try {
 			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -161,5 +314,57 @@ public class SelectDAO {
 		return (ls.size() == 0) ? null : ls;
 	}
 
+	public List<SoldierVO> selectAll() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
+		List<SoldierVO> ls = new ArrayList<>();	
+		String sql = "select \"SD\".\"NAME\", \"SD\".\"BIRTH\",\"DS\".\"DIVISION_NAME\", \"PS\".\"POSITION_NAME\", \"SD\".\"INDAY\", \"SD\".\"OUTDAY\", \"YR\".\"YEAR\" "
+				+ "from \"SOLDIER\" \"SD\", \"DIVISION\" \"DS\", \"POSITION\" \"PS\", \"YEAR\" \"YR\""
+				+ " where \"SD\".\"DIVISION_CODE\" = \"DS\".\"NUMBER\" and \"SD\".\"POSITION_CODE\" = \"PS\".\"NUMBER\" and \"SD\".\"YEAR\" = \"YR\".\"NUMBER\"";	
+		try {
+			conn = jdbcTemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				SoldierVO tmp = new SoldierVO(
+						rs.getString("NAME"),
+						LocalDate.parse(rs.getDate("BIRTH").toString()),
+						rs.getString("DIVISION_NAME"),
+						rs.getString("POSITION_NAME"),
+						LocalDate.parse(rs.getDate("INDAY").toString()),
+						LocalDate.parse(rs.getDate("OUTDAY").toString()),
+						rs.getString("YEAR")
+						);
+				ls.add(tmp);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return (ls.size() == 0) ? null : ls;
+	}
 	
 }

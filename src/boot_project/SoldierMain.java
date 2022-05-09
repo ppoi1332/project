@@ -55,14 +55,13 @@ public class SoldierMain {
 				System.out.println("보직 입력");
 				slm.PositionMananger(slD);
 				System.out.println("0.기타");
-				System.out.print("입력 : ");
+
 				long position_Code = scan.nextLong();
 				if (position_Code == 0) {
 					System.out.print("추가할 보직 입력 : ");
 					String position = scan.next();
 					pv = new PositionVO(0L, position);
 					isD.insertPosition(pv);
-					
 					System.out.println("보직 입력");
 					slm.PositionMananger(slD);
 					System.out.println("0.기타");
@@ -72,7 +71,7 @@ public class SoldierMain {
 				
 				System.out.println("입대일");
 				System.out.println("예) 2022-02-22");
-				System.out.println("입력 : ");
+				System.out.print("입력 : ");
 				String in_Day = scan.next();
 				
 				System.out.println("전역일");
@@ -88,10 +87,15 @@ public class SoldierMain {
 				isD.insertSoldier(sv);		
 				break;
 			case 2:
-				System.out.println("1.전체 출력  2.보직별로 출력  3.사단별로 출력  4.예비군 년차별로 출력");
+				System.out.println("1.전체 출력  2.사단별로 출력  3.보직별로 출력  4.예비군 년차별로 출력");
 				int num = scan.nextInt();
 				switch (num) {
 				case 1:
+					retSol = slD.selectAll();
+					for(SoldierVO tmp : retSol) {
+						System.out.println(tmp);
+					}
+					System.out.println();
 					break;
 				case 2:
 					System.out.println("사단 선택");
@@ -99,16 +103,44 @@ public class SoldierMain {
 					System.out.print("입력 : ");
 					long diSel = scan.nextLong();
 					retSol = slD.selectDivisionAll(diSel);
-					for(SoldierVO tmp : retSol) {
-						System.out.println(tmp);
+					if (retSol != null) {
+						for(SoldierVO tmp : retSol) {
+							System.out.println(tmp);
+						}
+					} else {
+						System.out.println("인원이 없습니다");
 					}
 					System.out.println();
 					break;
 				case 3:
 					System.out.println("보직 선택");
-					slm.PositionMananger(slD);
+					slm.PositionMananger(slD);	
+					System.out.print("입력 : ");
+					long poSel = scan.nextLong();
+					retSol = slD.selectPositionAll(poSel);
+					if (retSol != null) {
+						for(SoldierVO tmp : retSol) {
+							System.out.println(tmp);
+						}
+					} else {
+						System.out.println("인원이 없습니다");
+					}
+					System.out.println();
 					break;
 				case 4:
+					System.out.println("예비군 년차 선택");
+					slm.YearManager(slD);
+					System.out.print("입력 : ");
+					long yeSel = scan.nextLong();
+					retSol = slD.selectYearAll(yeSel);
+					if (retSol != null) {
+						for(SoldierVO tmp : retSol) {
+							System.out.println(tmp);
+						}
+					} else {
+						System.out.println("인원이 없습니다");
+					}
+ 					System.out.println();
 					break;
 				}
 				break;
