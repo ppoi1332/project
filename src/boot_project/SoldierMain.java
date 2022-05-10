@@ -15,13 +15,14 @@ public class SoldierMain {
 		
 		InsertDAO isD = new InsertDAO();
 		SelectDAO slD = new SelectDAO();
+		DeleteDAO dlD = new DeleteDAO();
 		List<DivisionVO> retDiv;
 		List<PositionVO> retPos;
 		List<SoldierVO> retSol;
 		SelectManager slm = new SelectManager();
 		
 		while (true) {		
-			System.out.println("1.설문 입력  2.출력  0.종료");
+			System.out.println("1.설문 입력  2.출력  3.삭제  0.종료");
 			int sel = scan.nextInt();
 			
 			switch(sel) {
@@ -34,18 +35,18 @@ public class SoldierMain {
 				System.out.print("입력 : ");
 				String birth = scan.next();
 				
-				System.out.println("사단 입력");
+				System.out.println("근무한 부대 입력");
 				slm.DivisionManager(slD);
 				System.out.println("0.기타");
 				System.out.print("입력 : ");
 				long division_Code = scan.nextLong();
 				
 				if (division_Code == 0) {
-					System.out.print("추가할 사단 입력 : ");
+					System.out.print("추가할 부대 입력 : ");
 					String division = scan.next();
 					dv = new DivisionVO(0L, division);
 					isD.insertDivision(dv);
-					System.out.println("사단 입력");
+					System.out.println("부대 입력");
 					slm.DivisionManager(slD);
 					System.out.println("0.기타");
 					System.out.print("입력 : ");
@@ -87,18 +88,22 @@ public class SoldierMain {
 				isD.insertSoldier(sv);		
 				break;
 			case 2:
-				System.out.println("1.전체 출력  2.사단별로 출력  3.보직별로 출력  4.예비군 년차별로 출력");
+				System.out.println("1.전체 출력  2.부대별로 출력  3.보직별로 출력  4.예비군 년차별로 출력");
 				int num = scan.nextInt();
 				switch (num) {
 				case 1:
 					retSol = slD.selectAll();
-					for(SoldierVO tmp : retSol) {
-						System.out.println(tmp);
+					if (retSol != null) {
+						for(SoldierVO tmp : retSol) {
+							System.out.println(tmp);
+						}
+					} else {
+						System.out.println("인원이 없습니다");
 					}
 					System.out.println();
 					break;
 				case 2:
-					System.out.println("사단 선택");
+					System.out.println("부대 선택");
 					slm.DivisionManager(slD);
 					System.out.print("입력 : ");
 					long diSel = scan.nextLong();
@@ -143,6 +148,17 @@ public class SoldierMain {
  					System.out.println();
 					break;
 				}
+				break;
+			case 3:
+				System.out.println("삭제할 사람 이름 입력");
+				retSol = slD.selectAll();
+				for(SoldierVO tmp : retSol) {
+					System.out.println(tmp);
+				}
+				System.out.println();
+				System.out.print("입력 : ");
+				String dname = scan.next();
+				dlD.deleteDAO(dname);
 				break;
 			case 0:
 				System.out.println("종료");

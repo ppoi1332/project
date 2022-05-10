@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class JdbcTemplate {
 	
 	private static JdbcTemplate instance;
-	private String url = "jdbc:oracle:thin:@wjdwls:1521:xe";
+	private String url = "jdbc:oracle:thin:@112.161.147.2:1521:xe";
 	private String user = "c##project";
 	private String passwd = "1234";
 	
