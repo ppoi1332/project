@@ -151,14 +151,19 @@ public class SoldierMain {
 				break;
 			case 3:
 				System.out.println("삭제할 사람 이름 입력");
-				retSol = slD.selectAll();
-				for(SoldierVO tmp : retSol) {
-					System.out.println(tmp);
+				retSol = dlD.selectAll();
+				if (retSol != null) {
+					for(SoldierVO tmp : retSol) {
+						System.out.println(tmp);
+					}
+					System.out.println();
+					System.out.print("입력 : ");
+					long dnum = scan.nextLong();
+					dlD.deleteDAO(dnum);
 				}
-				System.out.println();
-				System.out.print("입력 : ");
-				String dname = scan.next();
-				dlD.deleteDAO(dname);
+				else {
+					System.out.println("인원이 없습니다");
+				}
 				break;
 			case 0:
 				System.out.println("종료");

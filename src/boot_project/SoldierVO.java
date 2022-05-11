@@ -39,7 +39,7 @@ public class SoldierVO {
 		this.out_Day = out_Day;
 		this.year = year;
 	}
-
+	
 	public long getNumber() {
 		return number;
 	}
