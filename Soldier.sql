@@ -56,4 +56,3 @@ insert into "YEAR" values ("SEQ_YEAR".nextval, '4년차');
 insert into "YEAR" values ("SEQ_YEAR".nextval, '5년차');
 insert into "YEAR" values ("SEQ_YEAR".nextval, '6년차');
 insert into "YEAR" values ("SEQ_YEAR".nextval, '7년차~');
-
