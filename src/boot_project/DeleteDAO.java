@@ -28,7 +28,7 @@ public class DeleteDAO {
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				DeleteVO tmp = new DeleteVO(
+				SoldierVOex tmp = new SoldierVOex(
 						rs.getLong("NUMBER"),
 						rs.getString("NAME"),
 						LocalDate.parse(rs.getDate("BIRTH").toString())

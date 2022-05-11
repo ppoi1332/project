@@ -2,9 +2,9 @@ package boot_project;
 
 import java.time.LocalDate;
 
-public class DeleteVO extends SoldierVO {
+public class SoldierVOex extends SoldierVO {
 	
-	public DeleteVO (long number, String name, LocalDate birth) {
+	public SoldierVOex (long number, String name, LocalDate birth) {
 		super.number = number;
 		super.name = name;
 		super.birth = birth;
